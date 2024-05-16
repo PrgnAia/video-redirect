@@ -63,24 +63,10 @@
             cursor: pointer;
         }
     </style>
-    <script>
-        function skipVideo() {
-            document.getElementById("skipButton").style.display = "none";
-            redirectToGoogleDrive();
-        }
-
-        function redirectToGoogleDrive() {
-            window.location.href = "https://drive.google.com/drive/folders/1euDndw9TpyHLFsYCCeffvaf1z7GeAADt?fbclid=IwAR2sQNMK_Kdv5dU2Zmtk_GVEF0FX_YbvSAkEv98-Yt11TOlqs22FOBW6kGg";
-        }
-
-        function showSkipButton() {
-            document.getElementById("skipButton").style.display = "block";
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <iframe id="videoFrame" src="https://www.youtube.com/embed/UjEngEpiJKo?autoplay=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen onended="redirectToGoogleDrive();"></iframe>
+        <iframe id="videoFrame" src="https://www.youtube.com/embed/UjEngEpiJKo?autoplay=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <p>You will be redirected to the document shortly...</p>
         <div class="loading-bar">
             <div class="loading-bar-inner"></div>
@@ -89,7 +75,25 @@
     </div>
 
     <script>
+        function skipVideo() {
+            document.getElementById("skipButton").style.display = "none";
+            redirectToGoogleDrive();
+        }
+
+        function redirectToGoogleDrive() {
+            window.location.href = "https://drive.google.com/drive/folders/1euDndw9TpyHLFsYCCeffvaf1z7GeAADt";
+        }
+
+        function showSkipButton() {
+            document.getElementById("skipButton").style.display = "block";
+        }
+
         setTimeout(showSkipButton, 10000); // Show skip button after 10 seconds
+
+        // Redirect to Google Drive after video ends
+        document.getElementById("videoFrame").addEventListener("ended", function() {
+            redirectToGoogleDrive();
+        });
     </script>
 </body>
 </html>
