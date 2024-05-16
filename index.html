@@ -52,21 +52,44 @@
             0% { width: 0; }
             100% { width: 100%; }
         }
+        .skip-button {
+            display: none;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
     <script>
-        function redirect() {
+        function skipVideo() {
+            document.getElementById("skipButton").style.display = "none";
+            redirectToGoogleDrive();
+        }
+
+        function redirectToGoogleDrive() {
             window.location.href = "https://drive.google.com/drive/folders/1euDndw9TpyHLFsYCCeffvaf1z7GeAADt?fbclid=IwAR2sQNMK_Kdv5dU2Zmtk_GVEF0FX_YbvSAkEv98-Yt11TOlqs22FOBW6kGg";
         }
-        setTimeout(redirect, 5000); // Redirects after video
+
+        function showSkipButton() {
+            document.getElementById("skipButton").style.display = "block";
+        }
     </script>
 </head>
 <body>
     <div class="container">
-        <iframe src="https://www.youtube.com/embed/UjEngEpiJKo?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="videoFrame" src="https://www.youtube.com/embed/UjEngEpiJKo?autoplay=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen onended="redirectToGoogleDrive();"></iframe>
         <p>You will be redirected to the document shortly...</p>
         <div class="loading-bar">
             <div class="loading-bar-inner"></div>
         </div>
+        <button id="skipButton" class="skip-button" onclick="skipVideo()">Skip the Video</button>
     </div>
+
+    <script>
+        setTimeout(showSkipButton, 10000); // Show skip button after 10 seconds
+    </script>
 </body>
 </html>
